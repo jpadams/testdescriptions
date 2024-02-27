@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 )
 
 type Foo struct{}
@@ -10,6 +11,7 @@ func (m *Foo) Desc(ctx context.Context) (string, error) {
 	descGo, _ := dag.Git("https://github.com/jpadams/testgo.git").Branch("main").Tree().AsModule().Initialize().Description(ctx) 
 	descTs, _ := dag.Git("https://github.com/jpadams/testts.git").Branch("main").Tree().AsModule().Initialize().Description(ctx) 
 	descPy, _ := dag.Git("https://github.com/jpadams/testpy.git").Branch("main").Tree().AsModule().Initialize().Description(ctx) 
+	fmt.Printf("\n========\n%s\n========\n%s\n========\n%s\n========\n", descGo, descTs, descPy)
 	return dag.Container().
 		From("alpine:latest").
 		WithWorkdir("src").
